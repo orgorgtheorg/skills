@@ -1,0 +1,11 @@
+{
+  "skillId": "pipeline-review",
+  "version": 1,
+  "name": "Pipeline Review",
+  "tagline": "A sales veteran's read of any CRM pipeline export — plus the warm intros your own network can offer each open deal.",
+  "who": "Investors, advisors, and sales leaders who review someone else's pipeline and want fast, opinionated feedback — and to know exactly where their network opens doors.",
+  "how": "Drop in a pipeline CSV or Excel export: your agent sizes the pipeline, flags stalled, slipping, and single-threaded deals by name, and delivers a sheet plus a short written read. Add a LinkedIn data export and it cross-references your connections against the target accounts and ranks the two or three intros worth making this week.",
+  "category": "growth",
+  "accent": "oklch(0.72 0.11 300)",
+  "connectors": []
+}
