@@ -32,8 +32,8 @@ If only one input is present, do what it enables and ask for the other.
 - **Shape**: total $, count/$ by stage, average deal size, and top-3
   concentration (above ~50% is itself a finding).
 - **Health flags**, each naming the specific accounts: no next step, stale
-  > 21 days, slipped close dates, big deals stuck in early stages,
-  > single-threaded (one champion, no exec contact).
+  for 21+ days, slipped close dates, big deals stuck in early stages,
+  single-threaded (one champion, no exec contact).
 - Then 3–5 blunt observations a sales veteran would make — name accounts,
   no hedging.
 
