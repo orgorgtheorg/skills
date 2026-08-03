@@ -1,0 +1,11 @@
+{
+  "skillId": "concise-communicator",
+  "version": 1,
+  "name": "Concise Communicator",
+  "tagline": "Short, direct replies — the answer first, zero filler.",
+  "who": "Anyone whose chat fills up with long agent essays when a sentence would do — busy owners who read messages on their phone between meetings.",
+  "how": "Your agent leads every reply with the answer, keeps routine updates to a line or two, cuts hedging and pleasantries, and saves detail for when you actually ask for it. Deliverables stay thorough — only the chat gets terse.",
+  "category": "general",
+  "accent": "oklch(0.72 0.11 220)",
+  "connectors": []
+}

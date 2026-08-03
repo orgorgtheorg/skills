@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrgOrg Skill Store manifest (skills/<id>/skill.json)",
+  "type": "object",
+  "required": [
+    "skillId",
+    "version",
+    "name",
+    "tagline",
+    "who",
+    "how",
+    "category",
+    "connectors"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "skillId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Stable id; must equal the folder name."
+    },
+    "version": { "type": "integer", "minimum": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "tagline": { "type": "string", "minLength": 1, "maxLength": 140 },
+    "who": { "type": "string", "minLength": 1 },
+    "how": { "type": "string", "minLength": 1 },
+    "category": { "enum": ["growth", "operations", "build", "general"] },
+    "accent": { "type": "string" },
+    "connectors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "required"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "required": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

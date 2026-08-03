@@ -1,0 +1,28 @@
+name: Sync catalog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate manifests
+        run: node scripts/sync.mjs --check
+
+      - name: Sync catalog → dev
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY_DEV }}
+        run: node scripts/sync.mjs
+
+      - name: Sync catalog → prod
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY_PROD }}
+        run: node scripts/sync.mjs
