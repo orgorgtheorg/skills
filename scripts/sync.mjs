@@ -1,7 +1,8 @@
 // Validate every skills/<id>/skill.json and mirror the catalog into a Convex
 // deployment (agentInfra/skillCatalogSync:syncCatalog). Dependency-free on
 // purpose: validation is hand-rolled against the same rules as
-// schema/skill.schema.json so CI needs nothing beyond node + the convex CLI.
+// schema/skill.schema.json and the sync is a plain fetch, so CI needs nothing
+// beyond node.
 //
 //   node scripts/sync.mjs --check               validate only
 //   CONVEX_DEPLOY_KEY=… node scripts/sync.mjs   validate + sync
@@ -136,20 +137,39 @@ const payloadSkills = skills.map(({ iconPath, screenshotPaths, ...skill }) => ({
     ? { screenshotUrls: screenshotPaths.map(raw) }
     : {}),
 }));
-const payload = JSON.stringify({ repo, commitSha, skills: payloadSkills });
+// Call the deployment's function HTTP API directly rather than shelling out to
+// `npx convex run` — the CLI insists on being run from a Convex app root (a
+// package.json with convex as a dependency), which this repo deliberately
+// isn't. The deploy key doubles as the admin bearer token and names its own
+// deployment: "dev:dusty-ferret-895|<secret>".
+const deployKey = process.env.CONVEX_DEPLOY_KEY;
+const deploymentName = deployKey.split("|")[0].split(":").pop();
+const url = process.env.CONVEX_URL ?? `https://${deploymentName}.convex.cloud`;
+
 console.log(
-  `Syncing ${skills.length} skills @ ${commitSha.slice(0, 10)} (${repo})…`,
+  `Syncing ${skills.length} skills @ ${commitSha.slice(0, 10)} (${repo}) → ${deploymentName}…`,
 );
-const out = execFileSync(
-  "npx",
-  [
-    "--yes",
-    "convex@latest",
-    "run",
-    "agentInfra/skillCatalogSync:syncCatalog",
-    payload,
-  ],
-  { encoding: "utf8" },
+const res = await fetch(
+  `${url}/api/run/agentInfra/skillCatalogSync/syncCatalog`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Convex ${deployKey}`,
+    },
+    body: JSON.stringify({
+      args: { repo, commitSha, skills: payloadSkills },
+      format: "json",
+    }),
+  },
 );
-console.log(out.trim());
-console.log("✔ synced");
+const body = await res.json().catch(() => null);
+if (!res.ok || body?.status !== "success") {
+  fail(
+    `sync failed (HTTP ${res.status}): ${body ? JSON.stringify(body) : await res.text()}`,
+  );
+  process.exit(1);
+}
+console.log(
+  `✔ synced — upserted ${body.value.upserted}, deleted ${body.value.deleted}`,
+);

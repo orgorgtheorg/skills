@@ -22,7 +22,11 @@ jobs:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY_DEV }}
         run: node scripts/sync.mjs
 
+      # Expected to fail until the Skill Store branch (orgorg#3889) ships to
+      # prod — syncCatalog doesn't exist on the prod deployment yet. Flip this
+      # back to a hard failure once it does.
       - name: Sync catalog → prod
+        continue-on-error: true
         env:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY_PROD }}
         run: node scripts/sync.mjs
