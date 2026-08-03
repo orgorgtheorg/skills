@@ -17,14 +17,15 @@ jobs:
       - name: Validate manifests
         run: node scripts/sync.mjs --check
 
+      # Non-blocking: the shared dev deployment only gains syncCatalog once a
+      # post-Skill-Store checkout pushes its Convex functions, so dev can lag
+      # behind main. Never let that hold the prod sync hostage.
       - name: Sync catalog → dev
+        continue-on-error: true
         env:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY_DEV }}
         run: node scripts/sync.mjs
 
-      # Off until the Skill Store branch (orgorg#3889) ships to prod —
-      # syncCatalog doesn't exist on the prod deployment yet. To turn it on,
-      # set the repo variable SYNC_PROD=true (gh variable set SYNC_PROD -b true).
       - name: Sync catalog → prod
         if: vars.SYNC_PROD == 'true'
         env:
