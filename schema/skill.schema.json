@@ -26,6 +26,10 @@
     "how": { "type": "string", "minLength": 1 },
     "category": { "enum": ["growth", "operations", "build", "general"] },
     "accent": { "type": "string" },
+    "featured": {
+      "type": "boolean",
+      "description": "Pins this skill to the store's Featured slot. At most one skill should set it."
+    },
     "connectors": {
       "type": "array",
       "items": {
