@@ -1,0 +1,11 @@
+{
+  "skillId": "weekly-report",
+  "version": 1,
+  "name": "Weekly Report",
+  "tagline": "A Monday-morning digest of last week — meetings, email, and every action item you committed to, traced to its source.",
+  "who": "Leaders and investors whose week is back-to-back meetings — anyone who wants Monday to start with what happened, what they promised, and what needs them, without rereading anything.",
+  "how": "Every Monday (or on request) your agent sweeps the week's meeting notes, email, and calendar, and delivers a one-page report doc — top of mind, this week's meetings, a deduped action-item list, next week's prep — plus a two-line chat summary. Missing a source? It works with what it has and flags the gap once.",
+  "category": "operations",
+  "accent": "oklch(0.72 0.13 150)",
+  "connectors": []
+}
