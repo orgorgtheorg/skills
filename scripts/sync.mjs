@@ -38,6 +38,8 @@ function validate(id, m) {
     fail(`${ctx}: category must be one of ${[...CATEGORIES].join("/")}`);
   if (m.accent !== undefined && typeof m.accent !== "string")
     fail(`${ctx}: accent must be a string`);
+  if (m.featured !== undefined && typeof m.featured !== "boolean")
+    fail(`${ctx}: featured must be a boolean`);
   if (!Array.isArray(m.connectors)) fail(`${ctx}: connectors must be an array`);
   for (const c of m.connectors ?? []) {
     if (
@@ -57,6 +59,7 @@ function validate(id, m) {
     "how",
     "category",
     "accent",
+    "featured",
     "connectors",
   ]);
   for (const key of Object.keys(m)) {
@@ -101,6 +104,11 @@ for (const id of ids) {
         .map((f) => `skills/${id}/screenshots/${f}`)
     : [];
   skills.push({ ...manifest, iconPath, screenshotPaths });
+}
+
+const featuredIds = skills.filter((s) => s.featured).map((s) => s.skillId);
+if (featuredIds.length > 1) {
+  fail(`only one skill may set "featured": ${featuredIds.join(", ")}`);
 }
 
 if (process.exitCode) {

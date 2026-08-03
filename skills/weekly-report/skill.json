@@ -7,5 +7,6 @@
   "how": "Every Monday (or on request) your agent sweeps the week's meeting notes, email, and calendar, and delivers a one-page report doc — top of mind, this week's meetings, a deduped action-item list, next week's prep — plus a two-line chat summary. Missing a source? It works with what it has and flags the gap once.",
   "category": "operations",
   "accent": "oklch(0.72 0.13 150)",
+  "featured": true,
   "connectors": []
 }
