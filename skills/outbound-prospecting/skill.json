@@ -1,0 +1,11 @@
+{
+  "skillId": "outbound-prospecting",
+  "version": 1,
+  "name": "Outbound Prospecting",
+  "tagline": "A four-step outbound workflow — target list, right person, real reason to reach out, and a draft that doesn't smell like AI.",
+  "who": "Founders and sellers doing their own outbound who want a repeatable prospecting system — and refuse to send the AI slop everyone else is blasting.",
+  "how": "Your agent walks you through four checkpointed steps: define your ICP and build the company list (with Clay if you use it), find the right person at each company, dig up a genuine connection trigger — mutual ties, a firm-level problem, or common ground — then guide you through your own template so every email reads like you wrote it. Nothing sends itself: you approve every draft, and you hit send.",
+  "category": "growth",
+  "accent": "oklch(0.7 0.14 45)",
+  "connectors": []
+}
