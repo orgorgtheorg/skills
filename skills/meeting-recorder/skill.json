@@ -1,0 +1,11 @@
+{
+  "skillId": "meeting-recorder",
+  "version": 1,
+  "name": "Meeting Recorder",
+  "tagline": "Your agent sits in the call, records it, and hands you the notes, the decisions and the follow-ups afterwards.",
+  "who": "Anyone who runs more calls than they can write up — founders, sellers and managers who lose the decision that was made because nobody was taking notes.",
+  "how": "Give your agent the meeting link and the time. It checks it can actually get in while there is still time to fix it — and if the service needs a sign-in, it asks you to take over the shared browser once, rather than failing at two minutes to the hour. At the meeting it joins muted, says in the chat that it is recording, turns on the platform's live captions and keeps both the audio and the transcript. Afterwards you get notes, the decisions, and the action items filed as real tasks. It knows Google Meet, Zoom, Teams and Webex by name, and works the rest out from the join page.",
+  "category": "operations",
+  "accent": "oklch(0.68 0.15 25)",
+  "connectors": []
+}
