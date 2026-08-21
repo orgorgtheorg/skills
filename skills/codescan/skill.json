@@ -1,0 +1,11 @@
+{
+  "skillId": "codescan",
+  "version": 1,
+  "name": "Code Scan",
+  "tagline": "Static security review of code you own — forked agents read every candidate file; each finding lands at file:line, refuted before it ships.",
+  "who": "Teams sitting on a large codebase no security reviewer ever read — engineers and founders who want their own repo audited for real, exploitable bugs, not a linter's noise. You own the code, so nothing leaves your workspace and no live host is ever touched.",
+  "how": "It works like a security researcher, not a linter. First a fast, free pattern scan casts a wide net over the whole repo and flags the files worth a closer look. Then your agent fans dozens of cheap forked sub-agents across those candidates — one batch of files each — and every sub-agent reads the code in depth against a world-class-reviewer prompt: auth bypasses, injection, SSRF, path traversal, hardcoded secrets, subtle logic flaws. It is static only — it never runs or exploits the code. Every candidate finding is then refuted: an independent pass tries to disprove it and checks git history for whether it was already fixed, and only what survives is reported. You get a written report and a findings sheet — each finding at file:line, with the code, the impact, and a concrete fix — delivered to you and no one else.",
+  "category": "operations",
+  "accent": "oklch(0.58 0.16 265)",
+  "connectors": []
+}
