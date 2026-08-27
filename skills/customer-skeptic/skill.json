@@ -1,0 +1,11 @@
+{
+  "skillId": "customer-skeptic",
+  "version": 1,
+  "name": "Customer Skeptic",
+  "tagline": "A tired senior buyer's read of any marketing asset — scoreline first, then the full flag-by-flag read as a doc.",
+  "who": "Marketers and founders who want to know what a skeptical buyer actually thinks of a deck, hero copy, or one-pager before it ships.",
+  "how": "Drop in the asset. The agent reads it as a senior buyer between two other vendor evaluations — pattern-matched, unconvinced, looking for a reason to deprioritize — and answers in chat with a red/yellow/green scoreline, a 1–10 customer-readiness score, and the single highest-leverage fix. The full read lands as a doc: the findings that matter, what's working, the path to a 9, with every competitive claim tagged as anchored, pattern-matched, or reasoning.",
+  "category": "growth",
+  "accent": "oklch(0.68 0.15 25)",
+  "connectors": []
+}
