@@ -1,0 +1,11 @@
+{
+  "skillId": "press-release-drafter",
+  "version": 1,
+  "name": "Press Release Drafter",
+  "tagline": "The release the world should read the day it ships — cold read first, gaps marked, newsworthiness scored honestly.",
+  "who": "Founders and PMMs announcing something — or deciding what to build — who want to see how the market reads it before the market does.",
+  "how": "Hand the agent a milestone, a feature list, or even bare product names. It opens with the cold read — what the world, with zero context, thinks this is — then drafts a modern, under-400-word release as a doc: real facts in the body, every inferred claim marked for confirmation, quote slots as suggestions to accept, never fabricated attributions. Announcement mode adds an honest verdict (press-worthy, social-only, or internal — minor releases stop at a changelog entry). The questions only the product team can answer land as a checklist assigned to you, because in working-backwards mode that list is half the deliverable.",
+  "category": "growth",
+  "accent": "oklch(0.6 0.15 320)",
+  "connectors": []
+}
