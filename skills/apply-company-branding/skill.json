@@ -1,0 +1,11 @@
+{
+  "skillId": "apply-company-branding",
+  "version": 1,
+  "name": "Company Branding",
+  "tagline": "Capture your house style once — voice, grammar calls, banned words, product terminology — then every draft follows it.",
+  "who": "Companies whose copy sounds different in every asset because the style rules live in someone's head.",
+  "how": "Drop your existing brand docs and 10–20 pieces of on-brand content into the workspace. The agent infers your style guide — voice qualities with on-brand/off-brand pairs, grammar hard rules, the banned-words table with replacements, product terminology — marking every inferred rule for you to confirm as a suggestion in the doc. The two decisions worth making deliberately (em dashes, Oxford comma) come to you as a question. The finished guide lives on the agent's computer, and from then on a pre-delivery checklist runs silently on everything it writes for you.",
+  "category": "growth",
+  "accent": "oklch(0.64 0.12 260)",
+  "connectors": []
+}
