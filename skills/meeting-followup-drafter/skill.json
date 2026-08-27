@@ -1,0 +1,11 @@
+{
+  "skillId": "meeting-followup-drafter",
+  "version": 1,
+  "name": "Meeting Follow-up Drafter",
+  "tagline": "Every meeting gets a recap email drafted the same day — summary, owners, deadlines — waiting for your one-tap send or skip.",
+  "who": "Operators who end each day owing five recap emails and want to batch-review drafts instead of writing them.",
+  "how": "Drop the day's meeting transcripts or notes into the workspace (or wire your call recorder to export there) and the agent runs on a daily schedule: for each meeting it extracts decisions, action items with owners and deadlines, and open questions, checks prior threads you've shared for context, and drafts a short recap in your voice — under 90 seconds to read. Each draft comes to you as its own send/edit/skip question you can answer from your phone. Nothing sends without your yes.",
+  "category": "growth",
+  "accent": "oklch(0.68 0.11 240)",
+  "connectors": []
+}
