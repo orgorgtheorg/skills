@@ -1,0 +1,11 @@
+{
+  "skillId": "marketing-brain-observer",
+  "version": 1,
+  "name": "Brain Observer",
+  "tagline": "A weekly sweep that catches drift between your marketing canon and what you actually shipped — then asks: evolve, or hold?",
+  "who": "Teams where more than one person writes copy, and the positioning that was decided quietly stops matching the copy that ships.",
+  "how": "Point the agent at your canon (your GTM brain or any positioning/voice docs) and drop the week's shipped output into the workspace. On a weekly schedule it reads the output against the canon and reports every drift as a numbered, counted, quoted observation — then raises each one as a question you can answer from your phone: evolve the canon, or hold the line and fix the copy? A running drift log and rollup show which lines keep losing, which decisions are still open, and which channel drifts every single week.",
+  "category": "growth",
+  "accent": "oklch(0.72 0.11 220)",
+  "connectors": []
+}
