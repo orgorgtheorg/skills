@@ -1,0 +1,11 @@
+{
+  "skillId": "live-competitive-intel",
+  "version": 1,
+  "name": "Living Competitive Intel",
+  "tagline": "An always-current brief per competitor — refreshed weekly, shown as a diff, weighted so their marketing is never treated as truth.",
+  "who": "Founders and sales teams who need to know what actually changed at each competitor — pricing, positioning, product — without re-reading everything weekly.",
+  "how": "Name a competitor and the agent researches them in its browser — site, pricing, changelog, careers, reviews, community — and writes a living brief on its computer. On a weekly schedule it re-crawls and leads with the diff: what moved, dated, with the so-what. Every finding is weighted by claim type (deal evidence beats primary sources beats reviews beats their marketing), the load-bearing claims land as a short verify-before-acting list, and segment lenses cut the read by industry, geography, or company size, each leading with what to do.",
+  "category": "growth",
+  "accent": "oklch(0.7 0.14 45)",
+  "connectors": []
+}
