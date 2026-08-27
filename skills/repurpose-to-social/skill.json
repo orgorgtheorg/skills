@@ -1,0 +1,11 @@
+{
+  "skillId": "repurpose-to-social",
+  "version": 1,
+  "name": "Repurpose to Social",
+  "tagline": "Turn a blog post or announcement into ready-to-post social copy in your brand voice — one LinkedIn post, two shorts, hooks included.",
+  "who": "Anyone who publishes long-form content and wants the social posts done in the same voice, without \"thrilled to announce\".",
+  "how": "Drop in a blog post, launch announcement, or any long-form doc. The agent reads your brand voice from the workspace style guide when one exists (direct, credible, no hype otherwise) and delivers a doc with one LinkedIn post, two short posts each making a different point, at least three hook options, and a skeptic check flagging any claim the source doesn't actually support.",
+  "category": "growth",
+  "accent": "oklch(0.7 0.12 180)",
+  "connectors": []
+}
