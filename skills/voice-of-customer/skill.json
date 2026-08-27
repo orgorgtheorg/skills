@@ -1,0 +1,11 @@
+{
+  "skillId": "voice-of-customer",
+  "version": 1,
+  "name": "Voice of Customer",
+  "tagline": "A weekly digest of what customers actually said — verbatim quotes, counted shifts, account arcs — with a memory that spans weeks.",
+  "who": "Founders and GTM teams who record customer calls but never mine them — and who want trends in the customer's words, not marketing language.",
+  "how": "Drop call transcripts into the agent's workspace and it maintains one living digest: verbatim, fully attributed quotes grouped by theme in the customers' own words, week-over-week shifts with real counts (a trend word requires a number), and named account arcs a weekly snapshot structurally can't see. A quote registry prevents mis-attribution, a changelog carries the history, and on a weekly schedule the digest folds the new week in over itself. When the quote base grows, the agent offers a sortable, filterable dashboard app built on the same data.",
+  "category": "growth",
+  "accent": "oklch(0.72 0.11 300)",
+  "connectors": []
+}
