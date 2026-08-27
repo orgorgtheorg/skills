@@ -1,0 +1,11 @@
+{
+  "skillId": "gtm-brain-builder",
+  "version": 1,
+  "name": "GTM Brain Builder",
+  "tagline": "Build the company context file every other GTM skill reads — from a URL and five rough guesses, in about ten minutes.",
+  "who": "Founders and lean marketing operators whose AI output sounds generic because the agent doesn't know the company yet.",
+  "how": "Give the agent your homepage URL and answer a five-question form with rough guesses. It researches your site and competitors in its browser, drafts the whole context file in one pass with gaps marked, then asks at most seven confirmation questions against the draft. The result lives on the agent's computer as a living document: positioning, ICP, customer language, competitors, voice, and proof — with every guess and gap honestly tagged so downstream work is grounded, never invented.",
+  "category": "growth",
+  "accent": "oklch(0.72 0.13 150)",
+  "connectors": []
+}
