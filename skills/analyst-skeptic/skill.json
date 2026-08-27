@@ -1,0 +1,11 @@
+{
+  "skillId": "analyst-skeptic",
+  "version": 1,
+  "name": "Analyst Skeptic",
+  "tagline": "A Gartner/Forrester-style read of your positioning — where you actually sit in the category, and whether that position holds.",
+  "who": "Founders and product marketers preparing category narratives, analyst briefings, or positioning docs who want the analyst's verdict before the briefing.",
+  "how": "Drop in the asset. The agent reads it as a senior industry analyst slotting a vendor into a category map — not deciding whether to buy, but scoring precisely where you're positioned, how differentiated from named alternatives, and whether the position survives scrutiny. Chat gets the scoreline: red/yellow/green plus a 1–10 positioning clarity score and the single highest-leverage fix. The full read lands as a doc with the substitution test run out loud, a quadrant sketch where useful, and every category claim tagged by evidence tier.",
+  "category": "growth",
+  "accent": "oklch(0.58 0.16 265)",
+  "connectors": []
+}
