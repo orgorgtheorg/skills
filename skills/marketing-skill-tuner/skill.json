@@ -1,0 +1,11 @@
+{
+  "skillId": "marketing-skill-tuner",
+  "version": 1,
+  "name": "Skill Tuner",
+  "tagline": "Define what a good output looks like, score a real run against it, and get the one edit to make first — with a log so tuning compounds.",
+  "who": "Anyone whose taught skill isn't producing what they want — or who wants to know if it's good enough to share.",
+  "how": "Point the agent at a learned skill and one real run — a task it actually did. Together you pin down what good looks like as roughly three anchored 1–10 criteria; the agent scores the run with evidence for every number, then delivers three distinct paths to a 10 led by the one concrete edit to try first, with exact replacement text ready to apply. It applies the edit to the skill's file on its own computer, you re-run, it re-scores on the same scale, and a tuning log keeps failed experiments failed. Guardrails stop the scale from becoming a cage: it judges outputs, never procedure, and says so when the right fix isn't obvious.",
+  "category": "general",
+  "accent": "oklch(0.62 0.1 280)",
+  "connectors": []
+}
