@@ -1,0 +1,11 @@
+{
+  "skillId": "account-research",
+  "version": 1,
+  "name": "Account Research",
+  "tagline": "Actionable sales intel on any company or person before outreach — researched live in the agent's browser, scored against your ICP.",
+  "who": "Founders and reps who want their best-rep-quality research on a prospect — or an honest \"don't pursue\" — before a call or a sequence.",
+  "how": "Say \"research <company>\" and the agent works its browser: site, news, funding, careers, LinkedIn, competitive footprint. It reads your GTM brain first so the research is calibrated to your ICP and pains, not generic. One account returns a research doc with a quick take, trigger events, key people with talking points, qualification signals, and a recommended approach with discovery questions. A CSV of accounts fans out to helper agents and returns one sheet, a row per account with a fit verdict — including the accounts to walk away from.",
+  "category": "growth",
+  "accent": "oklch(0.68 0.13 200)",
+  "connectors": []
+}
