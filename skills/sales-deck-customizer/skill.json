@@ -1,0 +1,11 @@
+{
+  "skillId": "sales-deck-customizer",
+  "version": 1,
+  "name": "Sales Deck Customizer",
+  "tagline": "Your approved deck, translated into one prospect's conversation — their words on the problem slide, their competitor, their next step.",
+  "who": "Reps and founders who present the same first-call deck and want it customized to each account without rebuilding or off-brand redesigns.",
+  "how": "Store the team's standard deck on the agent's computer once. After a call, drop in the transcript: the agent edits a copy of the real .pptx — the prospect's verbatim problem on the problem slide, proof reordered to their industry, the competitor they actually named, a closing slide built from what was agreed — and hands back the file plus a slide map tracing every change to a transcript line. Design, fonts, and structure pass through untouched. For a first meeting with no transcript, it customizes from live research instead, with every inference labeled. Approved claims are never strengthened, and nothing is invented.",
+  "category": "growth",
+  "accent": "oklch(0.66 0.14 85)",
+  "connectors": []
+}
