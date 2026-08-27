@@ -1,0 +1,11 @@
+{
+  "skillId": "ai-delegation-specialist",
+  "version": 1,
+  "name": "Delegation Specialist",
+  "tagline": "Drop in a transcript, thread, or task list — get a sharp review, then a ranked menu of the work your agent can take off your plate.",
+  "who": "Lean operators and small teams who are overwhelmed, unsure what an AI coworker should own, and tired of figuring that out themselves.",
+  "how": "Hand the agent anything from your day: a meeting transcript, an email or Slack thread, a task list, a draft asset. It proves it read the input with a short, specific review, then presents a ranked menu of delegatable actions — each traced to the moment it came from, scored by impact and doability — as a multi-select you answer from anywhere. It always includes an honest keep-this-human section for the decisions AI shouldn't own. Pick your rows and it executes the batch as first drafts, checking items off as deliverables land. Nothing is ever sent or published; you ship.",
+  "category": "growth",
+  "accent": "oklch(0.7 0.13 100)",
+  "connectors": []
+}
