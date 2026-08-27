@@ -1,0 +1,11 @@
+{
+  "skillId": "create-battlecards",
+  "version": 1,
+  "name": "Battle Cards",
+  "tagline": "A one-page, rep-ready competitive card: the 3 moves that win the deal, a proof-backed fight, and objection handling.",
+  "who": "Sales teams and founders selling against named competitors who need a card a rep can scan in the minute before a call.",
+  "how": "Name the competitor and the agent researches the matchup — reusing its Living Competitive Intel brief when one exists — and delivers the card as a one-page doc: the 3 winning moves, the 5–6 fight rows that decide the deal (including honest parity), if-they-say/you-say objection handling, and your own landmines pre-answered. Every claim is sourced and dated or visibly flagged; the card stays under a page because a shorter card a rep actually reads beats a complete card nobody opens. Segment cuts by industry, geo, or size on request.",
+  "category": "growth",
+  "accent": "oklch(0.62 0.18 25)",
+  "connectors": []
+}
