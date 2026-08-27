@@ -1,0 +1,11 @@
+{
+  "skillId": "messaging-foundation",
+  "version": 1,
+  "name": "Messaging Foundation",
+  "tagline": "Senior-PMM product messaging: classify the release, distill the pains, differentiate on tradeoffs, and survive the skeptical CFO.",
+  "who": "Product marketers and founders turning a release into positioning and messaging that a specific buyer would actually believe.",
+  "how": "Hand the agent a release — PRD, feature spec, changelog, whatever exists. It classifies the tier first (a minor release stops at an internal changelog entry, honestly), then works the spine: who actually buys, one primary pain and at most three secondary, the value mechanism, and differentiation against the status quo, the incumbent, and the good-enough DIY alternative — stated as tradeoffs, never adjectives. Output is a doc: positioning statement, customer-language headline, three proof points with mechanisms, labeled by buyer-journey stage, and a mandatory self-critique pass with the skeptic rewrites shown.",
+  "category": "growth",
+  "accent": "oklch(0.6 0.13 140)",
+  "connectors": []
+}
