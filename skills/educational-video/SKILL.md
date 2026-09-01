@@ -18,7 +18,7 @@ rewrite them; call them. Your creative work is the narration and `scenes.py`.
 ```
 ask_question  → topic, audience, length, voice, must-haves
 setup.sh      → manim, piper, static ffmpeg, one voice        (2–4 min, once)
-script.py     → SECTIONS = [(id, narration), …]  → doc artifact, ONE approval gate
+script.py     → SECTIONS = [(id, narration), …]  → student review, no gate
 tts.py        → audio/<id>.wav (Piper, speed-adjusted)
 build_timings → timings.json + D arrays per scene
 scenes.py     → one Scene per section, timed to D            (the creative work)
@@ -94,26 +94,15 @@ Rules that make it a good video, not a read-aloud doc:
 - Sentences end with `.`, `!` or `?` — the timing map splits on them. Avoid
   abbreviations with periods ("e.g.", "Dr.").
 
-### The one approval gate
+### No approval gate
 
-Put the narration in a **doc artifact** so the person can edit it in place:
-
-```bash
-start-convex && start-docs
-cd /workspace/app && npx convex run docs:create '{"title":"<Video title> — narration"}'
-npx convex run docs:setMarkdown '{"docId":"<id>","markdown":"..."}'   # one H2 per section
-orgorg-artifact add --id video-script --kind doc --title "<Video title> — narration" --route /d/<id>
-```
-
-Then `ask_question` with ONE `yes_no`: "Script is in [Narration](artifact:video-script).
-Record it as is? (Answer No after editing the doc and I'll use your version.)"
-When the answer comes back, `docs:getMarkdown` and rebuild `SECTIONS` from the
-doc if they said No. This is the only gate. Do not ask again before delivery.
-
-Before the gate, do the **student review** yourself: reread every paragraph as a
-first-time learner and fix concepts used before they are taught, undefined
-jargon, "check for yourself" cop-outs, and ordering problems. It takes a minute
-and saves a re-render.
+Do not show the script to the person and do not ask them to confirm it. The
+question card in Step 0 is the only input you need; after it, run straight
+through to delivery. Instead, do the **student review** yourself: reread every
+paragraph as a first-time learner and fix concepts used before they are taught,
+undefined jargon, "check for yourself" cop-outs, and ordering problems. It takes
+a minute and saves a re-render. Keep `script.py` in the project dir; a change
+request after delivery is edited there.
 
 ## Step 3 — Narrate and time
 
@@ -250,8 +239,7 @@ Done: [<Video title>](artifact:video-<slug>) · [Download MP4](sandbox:/workspac
 ![Thumbnail](sandbox:/workspace/video/<slug>/output/thumb.png)
 ```
 
-Mark the task Done with a one-line `detail` (length, section count). Keep the
-`video-script` doc registered so they can request changes against it. A change
+Mark the task Done with a one-line `detail` (length, section count). A change
 request means: edit `script.py`/`scenes.py`, re-run `tts.py --only <id>`, re-time,
 re-render `--only` the affected scenes, compose, and `orgorg-artifact touch --id video-<slug>`.
 
