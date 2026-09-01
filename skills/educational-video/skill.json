@@ -1,0 +1,11 @@
+{
+  "skillId": "educational-video",
+  "version": 1,
+  "name": "Educational Video",
+  "tagline": "Turn a topic, notes, or a study guide into a narrated, animated explainer video — rendered right on your agent's computer.",
+  "who": "Founders, educators, and teams who want a polished explainer or lecture video without a video editor: onboarding walkthroughs, concept explainers for customers, internal training, or a study guide turned into something watchable.",
+  "how": "Your agent first asks what the video is about, who it is for, and how long it should be. It writes an intuition-first narration script and shows it to you as a doc for one round of edits. Then it records the narration with an offline voice, builds animated scenes timed sentence by sentence to the audio, renders them one at a time on its own machine, burns in word-by-word captions, and stitches the result into one MP4. You get a playable video tab, a download link, and the script doc. Everything runs on the agent's computer with CPU-only tools — no cloud render, no API keys, no background music.",
+  "category": "general",
+  "accent": "oklch(0.65 0.17 260)",
+  "connectors": []
+}
