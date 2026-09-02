@@ -1,0 +1,11 @@
+{
+  "skillId": "latex",
+  "version": 1,
+  "name": "LaTeX Math Rendering",
+  "tagline": "Render real math in the apps your agent builds — formulas, integrals, matrices — from LaTeX, not garbled text.",
+  "who": "Anyone whose material has math in it: students and instructors working from a textbook or problem set, tutors, analysts and scientists with formulas in their data. If an app your agent built shows equations as raw backslash text or mangled symbols, this is the fix.",
+  "how": "Teaches your agent to render math properly with KaTeX in any app it builds. It adds the KaTeX library to the app, drops in a ready-made <Math> component for single formulas and a <MathText> component for prose with inline math, and — the part that matters most — makes the agent capture math as LaTeX in the first place, transcribing it from the PDF or image instead of pasting the mangled characters that plain text extraction produces. A formula it cannot parse renders in place instead of breaking the app, so a rough transcription is always safe to show.",
+  "category": "build",
+  "accent": "oklch(0.6 0.14 220)",
+  "connectors": []
+}
