@@ -1,0 +1,21 @@
+/* modern — sans-serif, left-aligned header, one accent color. The default.
+   Fits tech, startups, product, design, operations, and most corporate roles. */
+:root {
+  --base: 10.5pt;
+  --font-body:
+    "Noto Sans", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+}
+@page {
+  margin: 0.6in 0.7in;
+}
+.name {
+  color: var(--accent);
+}
+.sec h2 {
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+}
+.contact a {
+  color: var(--ink);
+}

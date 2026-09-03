@@ -1,0 +1,153 @@
+/* Shared structure for every theme. Themes set the fonts, the base size, the
+   page margins, and how the name and section headings look. All sizes are em
+   so that --scale (the fit-to-page knob) shrinks type and spacing together. */
+:root {
+  --scale: 1;
+  --base: 10.5pt;
+  --accent: #1f2937;
+  --ink: #111827;
+  --muted: #4b5563;
+  --rule: #d1d5db;
+  --font-body:
+    "Noto Sans", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+}
+@page {
+  margin: 0.6in 0.7in;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: calc(var(--base) * var(--scale));
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.32;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+p,
+li {
+  orphans: 2;
+  widows: 2;
+}
+.head {
+  margin-bottom: 0.7em;
+}
+.name {
+  font-family: var(--font-head);
+  font-size: 2.15em;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.headline {
+  font-size: 1.06em;
+  color: var(--muted);
+  margin: 0.3em 0 0;
+}
+.contact {
+  font-size: 0.93em;
+  color: var(--muted);
+  margin: 0.45em 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.5em;
+}
+.contact .sep {
+  color: var(--rule);
+}
+.sec {
+  margin-top: 0.85em;
+}
+.sec h2 {
+  font-family: var(--font-head);
+  font-size: 0.86em;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0.5em;
+  padding-bottom: 0.22em;
+  border-bottom: 1px solid var(--rule);
+  break-after: avoid;
+}
+.sec p {
+  margin: 0 0 0.45em;
+}
+.entry {
+  margin-bottom: 0.62em;
+}
+.entry:last-child {
+  margin-bottom: 0;
+}
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  break-after: avoid;
+}
+.entry-main {
+  min-width: 0;
+}
+.entry-main .title {
+  font-weight: 700;
+}
+.entry-main .title + .org::before {
+  content: "·";
+  margin: 0 0.4em;
+  color: var(--muted);
+}
+.entry-side {
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.95em;
+}
+.entry-side .loc + .dates::before {
+  content: "·";
+  margin: 0 0.4em;
+}
+.sub {
+  margin-top: 0.3em;
+}
+.sub .entry-head .title {
+  font-weight: 600;
+}
+ul {
+  margin: 0.22em 0 0;
+  padding-left: 1.05em;
+}
+ul ul {
+  margin-top: 0.1em;
+}
+li {
+  margin: 0 0 0.16em;
+  padding-left: 0.1em;
+  break-inside: avoid;
+}
+li::marker {
+  color: var(--muted);
+}
+.sec-skills ul {
+  list-style: none;
+  padding-left: 0;
+}
+.sec-skills li {
+  margin-bottom: 0.14em;
+}
+.sec-summary p {
+  margin-bottom: 0.2em;
+}
+code {
+  font-family: inherit;
+}

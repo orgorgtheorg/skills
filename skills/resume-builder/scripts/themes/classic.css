@@ -1,0 +1,37 @@
+/* classic — serif, centered header, small-caps section rules. Conservative
+   fields: law, finance, consulting, government, academia, medicine. */
+:root {
+  --base: 11pt;
+  --font-body:
+    "Noto Serif", "Liberation Serif", Georgia, "Times New Roman", serif;
+  --font-head: var(--font-body);
+}
+@page {
+  margin: 0.7in 0.8in;
+}
+.head {
+  text-align: center;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 0.8em;
+}
+.name {
+  font-size: 1.9em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.contact {
+  justify-content: center;
+}
+.sec h2 {
+  font-size: 0.95em;
+  font-variant: small-caps;
+  text-transform: none;
+  border-bottom: 1px solid var(--ink);
+}
+.entry-main .title {
+  font-weight: 700;
+}
+.entry-main .org {
+  font-style: italic;
+}

@@ -1,0 +1,35 @@
+/* compact — the modern look at 10pt with tighter margins and spacing. For a
+   long career that must fit two pages, or a dense one-page technical resume. */
+:root {
+  --base: 10pt;
+  --font-body:
+    "Noto Sans", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+}
+@page {
+  margin: 0.5in 0.6in;
+}
+body {
+  line-height: 1.26;
+}
+.name {
+  color: var(--accent);
+  font-size: 1.9em;
+}
+.head {
+  margin-bottom: 0.5em;
+}
+.sec {
+  margin-top: 0.65em;
+}
+.sec h2 {
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  margin-bottom: 0.35em;
+}
+.entry {
+  margin-bottom: 0.45em;
+}
+li {
+  margin-bottom: 0.1em;
+}
