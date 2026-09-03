@@ -33,10 +33,11 @@ The dialect (see ../templates/example.md for a complete resume):
   **bold**, *italic*, `code`, [text](url)       -> inline formatting
 
 Outputs, in --out (default: next to the input):
-  <stem>.html    the page that was printed
-  <stem>.pdf     the resume
-  <stem>-1.png   preview of page 1 (-2, -3 when they exist)
-  <stem>.docx    only with --docx (needs pandoc)
+  <stem>.html         the page that was printed
+  <stem>.pdf          the resume
+  <stem>-1.png        preview of page 1 (-2, -3 when they exist)
+  <stem>.docx         only with --docx (needs pandoc)
+  <stem>.render.json  the report the live preview tab (preview.py) reads
 
 Exit status is 0 even when the lint prints warnings; it is non-zero only when
 the file cannot be parsed or a tool is missing.
@@ -45,6 +46,7 @@ the file cannot be parsed or a tool is missing.
 import argparse
 import glob
 import html
+import json
 import os
 import re
 import shutil
@@ -681,13 +683,36 @@ def main():
                   "Cut content instead of shrinking further.")
     print(f"pdf: {pdf_path} ({pages} page{'s' if pages != 1 else ''}, theme {settings['theme']}, "
           f"scale {settings['scale']})")
-    for png in previews(pdf_path, stem, pages, args.dpi):
+    pngs = previews(pdf_path, stem, pages, args.dpi)
+    for png in pngs:
         print(f"preview: {png}")
-    for note in ats_check(pdf_path, model):
+    text_notes = ats_check(pdf_path, model)
+    for note in text_notes:
         print(f"  text check: {note}")
+    docx_path = None
     if args.docx:
         docx_path, error = write_docx(model, stem)
         print(f"docx: {docx_path}" if docx_path else f"  warn: {error}")
+    if target and pages > target:
+        warnings.append(f"still {pages} pages at the smallest readable size; cut content")
+    # The report preview.py reads to keep the live preview tab current.
+    report = {
+        "name": model["name"],
+        "theme": settings["theme"],
+        "paper": settings["paper"],
+        "pages": pages,
+        "target_pages": target,
+        "scale": settings["scale"],
+        "pdf": os.path.basename(pdf_path),
+        "docx": os.path.basename(docx_path) if docx_path else None,
+        "previews": [os.path.basename(p) for p in pngs],
+        "warnings": warnings,
+        "notes": infos,
+        "text_check": text_notes,
+        "rendered_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+    }
+    with open(f"{stem}.render.json", "w", encoding="utf-8") as fh:
+        json.dump(report, fh, indent=2)
 
 
 if __name__ == "__main__":

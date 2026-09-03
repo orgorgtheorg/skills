@@ -25,6 +25,8 @@ below come from them.
     target.md               the posting or description, what it screens for, the hire thesis
     resume.md               the tailored resume, in the render dialect
     resume.pdf, resume-1.png, resume.docx   rendered output
+    resume.render.json      the last render's report, read by the preview tab
+  preview.log               the preview server's log (one server serves every target)
 ```
 
 One master, many targets. A new fact goes into `master.md` first, then into
@@ -38,8 +40,8 @@ a target. Never edit a target resume without folding the fact back.
 2. target brief                 posting → must-haves, vocabulary, hire thesis
 3. impact interview             the questions that turn duties into results   (one card)
 4. write resume.md              stage playbook + XYZ bullets + keyword pass
-5. render                       python3 /.skills/resume-builder/scripts/render.py …
-6. look, fix, deliver           preview in chat + download links; then the next target
+5. render                       preview tab (once) + python3 /.skills/resume-builder/scripts/render.py …
+6. look, fix, deliver           the tab updates itself; preview in chat + download links; next target
 ```
 
 The whole flow is conversational and fast. Do it yourself; no worker fork.
@@ -200,7 +202,23 @@ invent, say no once, plainly, and offer scope language instead.
 
 Finish with the keyword pass and the summary formula in playbooks.md.
 
-## Step 5 — Render
+## Step 5 — Render, with the live preview tab open
+
+Open the preview tab once per target, before the first render, so the person
+watches the resume take shape while you work:
+
+```bash
+nohup python3 /.skills/resume-builder/scripts/preview.py > /workspace/resume/preview.log 2>&1 &
+orgorg-artifact add --id resume-<slug> --kind url --port 5190 --route /<slug>/ --title "Resume — <target>" --live
+```
+
+The tab shows the printed pages stacked like paper, the download links, and
+the last render's lint report. It polls the folder every two seconds, so every
+render below updates it by itself: never `orgorg-artifact touch` it. The
+server is idempotent (a second start exits at once) and serves every target
+at `/<slug>/`, so a new target needs only its own `orgorg-artifact add`.
+
+Then render, and re-render after every edit:
 
 ```bash
 python3 /.skills/resume-builder/scripts/render.py /workspace/resume/targets/<slug>/resume.md --pages 1 --docx
@@ -233,9 +251,12 @@ Three lines of chat, the preview, the links:
 ```
 Your resume for <target> is ready: one page, <theme>, built around <the thesis in a few words>.
 ![Page 1](sandbox:/workspace/resume/targets/<slug>/resume-1.png)
-[Download PDF](sandbox:/workspace/resume/targets/<slug>/Firstname-Lastname-Resume.pdf) · [Word](sandbox:/workspace/resume/targets/<slug>/resume.docx)
+[Download PDF](sandbox:/workspace/resume/targets/<slug>/Firstname-Lastname-Resume.pdf) · [Word](sandbox:/workspace/resume/targets/<slug>/resume.docx) · [Live preview](artifact:resume-<slug>)
 Please confirm: <the one to three numbers you want checked>.
 ```
+
+The preview tab stays live through every edit that follows, so a change
+request is: edit `resume.md`, render, and say in one line what changed.
 
 Copy the PDF to `Firstname-Lastname-Resume.pdf` for sending. Mark the task
 Done with a one-line detail. Update the `Targets` list in `master.md`.
