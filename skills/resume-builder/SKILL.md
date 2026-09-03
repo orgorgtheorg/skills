@@ -65,7 +65,11 @@ the message or a file in `/workspace` already answers. Ask the rest in one card:
    document is called a CV.
 5. **Length** — `choice`: Whatever fits the stage (recommended) / One page no
    matter what / Two pages are fine / The posting sets it.
-6. **Deadline** — `text`, optional.
+6. **Look** — `choice`: Conservative (serif, black) / Clean (sans, navy) /
+   Warm (serif, rust) / Bold (display name, deep accent) / Technical
+   (monospace accents, teal) / You pick for the field. The field's norms win
+   over the pick (playbooks.md, "The look").
+7. **Deadline** — `text`, optional.
 
 Then end your turn. The answers arrive as a chat message and reopen the task.
 
@@ -181,10 +185,9 @@ can be interviewed on.
 **Header**: name, city and state or country (no street), one phone, one
 professional email, LinkedIn as a visible URL, portfolio or GitHub when the
 target reads code or design. No photo, birth date, marital status, or
-nationality for the US, Canada, UK, Ireland, Australia, New Zealand. Where a
-photo is customary (Germany, Austria, France, Spain, Italy, Japan, Korea,
-China, much of Latin America and the Middle East) ask; the renderer places no
-photos, so say so and offer the .docx for them to add one.
+nationality for the US, Canada, UK, Ireland, Australia, New Zealand. Where a photo is customary (Germany, Austria, France, Spain, Italy, Japan, Korea,
+China, much of Latin America and the Middle East) ask for one; `photo:` in the
+front matter places it top right, in the PDF and the .docx.
 
 **Education**: degree, school, dates; the graduation year is optional past 15
 years; GPA when 3.5 or higher or when the target asks; honors; coursework only
@@ -224,11 +227,18 @@ Then render, and re-render after every edit:
 python3 /.skills/resume-builder/scripts/render.py /workspace/resume/targets/<slug>/resume.md --pages 1 --docx
 ```
 
-- `--theme modern` (default: sans-serif, one accent color), `classic`
-  (serif, centered header, for law, finance, government, academia), `compact`
-  (10 pt, for a two-page veteran). `--paper a4` outside North America.
-  `--accent '#1f4e79'` for the name and rules. The same keys work as front
-  matter at the top of `resume.md`.
+- `--theme`: `modern` (default: sans-serif, one accent), `classic` (serif,
+  centered, small caps: law, finance, government, academia), `compact` (10 pt:
+  a two-page veteran), `editorial` (serif display name over a sans body:
+  marketing, design, writing, leadership), `warm` (serif body, roomier:
+  education, nonprofits, healthcare, people roles), `technical` (monospace
+  headings and dates: engineering, data, security). Pick it from the Look
+  answer and the field (playbooks.md, "The look").
+- `--accent`: `navy`, `charcoal`, `forest`, `plum`, `rust`, `teal`, `black`, or
+  any CSS color. Each theme has a default.
+- `--photo headshot.jpg`: top right, only where the region expects one.
+- `--paper a4` outside North America. Every key also works as front matter at
+  the top of `resume.md` (`theme:`, `accent:`, `photo:`, `paper:`, `pages:`).
 - `--pages N` shrinks type in steps down to about 9.7 pt to fit. If it still
   overflows, it says so: cut content, never shrink further (research.md §2).
 - It prints a lint: weak openers, first person, over-long bullets, missing

@@ -4,18 +4,32 @@ into a print-quality PDF (plus preview PNGs, an ATS text check, and an
 optional .docx).
 
 usage:
-  python3 render.py resume.md [--out DIR] [--theme classic|modern|compact]
-                    [--paper letter|a4] [--pages N] [--accent '#1f4e79']
-                    [--docx] [--html-only] [--check] [--dpi 110]
+  python3 render.py resume.md [--out DIR]
+                    [--theme modern|classic|compact|editorial|warm|technical]
+                    [--paper letter|a4] [--pages N] [--accent navy|'#1f4e79']
+                    [--photo headshot.jpg] [--docx] [--html-only] [--check] [--dpi 110]
+
+Themes (all single column):
+  modern     sans-serif, left header, one accent            most fields (default)
+  classic    serif, centered header, small caps             law, finance, government, academia
+  compact    the modern look at 10 pt, tight margins        a two-page veteran
+  editorial  serif display name over a sans body            marketing, design, writing, leadership
+  warm       serif body, roomier leading, rust accent       education, nonprofits, healthcare, people roles
+  technical  sans body, monospace headings and dates        engineering, data, security, infrastructure
+Accents: navy, charcoal, forest, plum, rust, teal, black, or any CSS color.
+Photo: --photo (or `photo:` in the front matter), a path relative to the
+resume; placed top right in the PDF and the .docx. Use it only where the
+region expects one.
 
 The same options can live in optional front matter at the top of the file;
 CLI flags override it:
 
   ---
-  theme: modern
+  theme: editorial
+  accent: plum
   paper: letter
   pages: 1
-  accent: "#1f4e79"
+  photo: headshot.jpg
   ---
 
 The dialect (see ../templates/example.md for a complete resume):
@@ -44,9 +58,11 @@ the file cannot be parsed or a tool is missing.
 """
 
 import argparse
+import base64
 import glob
 import html
 import json
+import mimetypes
 import os
 import re
 import shutil
@@ -57,8 +73,31 @@ import tempfile
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-THEMES = ("classic", "modern", "compact")
+THEMES = ("modern", "classic", "compact", "editorial", "warm", "technical")
 PAPERS = {"letter": "letter", "a4": "A4"}
+# Named accents, so a personality word maps to a defensible color.
+ACCENTS = {
+    "navy": "#1f4e79",
+    "charcoal": "#2b2f36",
+    "forest": "#2f5d3a",
+    "plum": "#5b3a6e",
+    "rust": "#a0522d",
+    "teal": "#1f6f78",
+    "black": "#111111",
+}
+THEME_ACCENTS = {
+    "modern": "navy",
+    "compact": "navy",
+    "classic": "black",
+    "editorial": "charcoal",
+    "warm": "rust",
+    "technical": "teal",
+}
+
+
+def resolve_accent(value, theme):
+    value = (value or "").strip().lower() or THEME_ACCENTS[theme]
+    return ACCENTS.get(value, value)  # a preset name, or any CSS color
 FIT_SCALES = (1.0, 0.97, 0.94, 0.92)  # 0.92 of a 10.5pt base is ~9.7pt: the floor
 
 # ----------------------------------------------------------------------------
@@ -387,7 +426,8 @@ def render_html(model, settings, css):
         f"@page {{ size: {PAPERS[settings['paper']]}; }}",
         f":root {{ --scale: {settings['scale']}; --accent: {settings['accent']}; }}",
         "</style></head><body>",
-        '<header class="head">',
+        '<header class="head has-photo">' if settings.get("photo_uri") else '<header class="head">',
+        '<div class="head-text">',
         f'<h1 class="name">{inline(model["name"])}</h1>',
     ]
     if model["headline"]:
@@ -395,6 +435,9 @@ def render_html(model, settings, css):
     if model["contact"]:
         items = [contact_item(c) for c in model["contact"]]
         parts.append('<div class="contact">' + '<span class="sep">·</span>'.join(f"<span>{i}</span>" for i in items) + "</div>")
+    parts.append("</div>")
+    if settings.get("photo_uri"):
+        parts.append(f'<img class="photo" src="{settings["photo_uri"]}" alt="">')
     parts.append("</header>")
     for section in model["sections"]:
         parts.append(f'<section class="{section_class(section["title"])}">')
@@ -544,8 +587,10 @@ def ats_check(pdf_path, model):
     return notes
 
 
-def docx_markdown(model):
+def docx_markdown(model, photo_path=None):
     out = [f"# {model['name']}", ""]
+    if photo_path:
+        out += [f"![]({photo_path}){{width=1.05in}}", ""]
     if model["headline"]:
         out += [model["headline"], ""]
     if model["contact"]:
@@ -586,13 +631,13 @@ def docx_markdown(model):
     return "\n".join(out).rstrip() + "\n"
 
 
-def write_docx(model, stem):
+def write_docx(model, stem, photo_path=None):
     if not shutil.which("pandoc"):
         return None, "pandoc not installed; no .docx written"
     md_path = f"{stem}.docx.md"
     docx_path = f"{stem}.docx"
     with open(md_path, "w", encoding="utf-8") as fh:
-        fh.write(docx_markdown(model))
+        fh.write(docx_markdown(model, photo_path))
     result = subprocess.run(["pandoc", md_path, "-f", "markdown", "-t", "docx", "-o", docx_path],
                             capture_output=True, text=True)
     os.remove(md_path)
@@ -613,7 +658,8 @@ def main():
     ap.add_argument("--theme", choices=THEMES)
     ap.add_argument("--paper", choices=sorted(PAPERS))
     ap.add_argument("--pages", type=int, help="fit to this many pages by scaling type down to ~9.7pt")
-    ap.add_argument("--accent", help="CSS color for the name and rules, e.g. '#1f4e79'")
+    ap.add_argument("--accent", help="a preset (navy, charcoal, forest, plum, rust, teal, black) or any CSS color")
+    ap.add_argument("--photo", help="headshot image, placed top right; only where the region expects one")
     ap.add_argument("--docx", action="store_true", help="also write a .docx through pandoc")
     ap.add_argument("--html-only", action="store_true", help="write the HTML and stop")
     ap.add_argument("--check", action="store_true", help="parse and lint only; write nothing")
@@ -636,10 +682,23 @@ def main():
         sys.exit(f"render.py: unknown theme {settings['theme']!r}; use one of {', '.join(THEMES)}")
     if settings["paper"] not in PAPERS:
         sys.exit(f"render.py: unknown paper {settings['paper']!r}; use letter or a4")
-    if not settings["accent"]:
-        settings["accent"] = "#1f2937" if settings["theme"] != "classic" else "#111111"
+    settings["accent"] = resolve_accent(settings["accent"], settings["theme"])
 
     warnings, infos = lint(model, body)
+    photo = args.photo or meta.get("photo") or ""
+    settings["photo_path"] = ""
+    settings["photo_uri"] = ""
+    if photo:
+        photo_path = photo if os.path.isabs(photo) else os.path.join(os.path.dirname(os.path.abspath(args.source)), photo)
+        if os.path.isfile(photo_path):
+            mime = mimetypes.guess_type(photo_path)[0] or "image/jpeg"
+            with open(photo_path, "rb") as fh:
+                encoded = base64.b64encode(fh.read()).decode("ascii")
+            settings["photo_path"] = photo_path
+            settings["photo_uri"] = f"data:{mime};base64,{encoded}"
+            infos.append("photo included: keep it only where the region expects one (research.md §7)")
+        else:
+            warnings.append(f"photo not found: {photo_path}")
     print(f"parsed: {model['name']} — {len(model['sections'])} sections, "
           f"{sum(len(s['entries']) for s in model['sections'])} entries, "
           f"{len(list(iter_bullets(model)))} bullets")
@@ -691,7 +750,7 @@ def main():
         print(f"  text check: {note}")
     docx_path = None
     if args.docx:
-        docx_path, error = write_docx(model, stem)
+        docx_path, error = write_docx(model, stem, settings["photo_path"] or None)
         print(f"docx: {docx_path}" if docx_path else f"  warn: {error}")
     if target and pages > target:
         warnings.append(f"still {pages} pages at the smallest readable size; cut content")

@@ -1,0 +1,36 @@
+/* technical — a sans body with monospace headings, dates, and contact line,
+   and a teal accent. Engineering, data, security, infrastructure. Backtick
+   `code` in bullets renders in the mono face too. */
+:root {
+  --base: 10.5pt;
+  --font-body:
+    "Noto Sans", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+  --font-mono: "Noto Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
+}
+@page {
+  margin: 0.6in 0.7in;
+}
+.name {
+  color: var(--accent);
+}
+.contact,
+.entry-side,
+.sec h2 {
+  font-family: var(--font-mono);
+}
+.contact {
+  font-size: 0.86em;
+}
+.entry-side {
+  font-size: 0.86em;
+}
+.sec h2 {
+  font-size: 0.82em;
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+}
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}

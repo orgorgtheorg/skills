@@ -184,6 +184,27 @@ reader].** No adjectives about character. No "seeking a position".
    it that way; "Kubernetes (K8s)" when both forms appear).
 4. The headline carries the target title when the current title differs.
 
+## The look
+
+Personality on a resume is voice, selection, and a restrained typographic
+identity. It is never graphics, icons, columns, or skill bars. Map the Look
+answer to a theme and an accent, then let the field's norms override:
+
+| They want to read as | Theme       | Accent             |
+| -------------------- | ----------- | ------------------ |
+| Conservative         | `classic`   | `black` or `navy`  |
+| Clean                | `modern`    | `navy`, `charcoal` |
+| Warm                 | `warm`      | `rust`, `plum`     |
+| Bold                 | `editorial` | `plum`, `forest`   |
+| Technical            | `technical` | `teal`, `charcoal` |
+
+Field norms that win over the pick: law, finance, consulting, government,
+medicine, and academia read `classic`; a two-page senior resume reads
+`compact` or `classic`; a student club application can carry `warm` or
+`editorial` when the person wants it. One accent per resume, and the name is
+the only large thing on the page. If they hesitate, render two looks and let
+them choose in the preview tab.
+
 ## Header and contact
 
 - Name as they want to be called, the headline, then: City, ST · phone · email

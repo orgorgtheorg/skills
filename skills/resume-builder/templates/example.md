@@ -2,7 +2,7 @@
 theme: modern
 paper: letter
 pages: 1
-accent: "#1f4e79"
+accent: navy
 ---
 
 # Maya Okafor

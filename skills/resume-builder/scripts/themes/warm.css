@@ -1,0 +1,35 @@
+/* warm — a serif body with roomier leading and a rust accent. Reads as
+   approachable: education, nonprofits, healthcare, people roles, small
+   companies, a first job where warmth is the point. */
+:root {
+  --base: 10.5pt;
+  --font-body: "Noto Serif", "Liberation Serif", Georgia, serif;
+  --font-head:
+    "Noto Serif Display", "Noto Serif", "Liberation Serif", Georgia, serif;
+}
+@page {
+  margin: 0.65in 0.75in;
+}
+body {
+  line-height: 1.38;
+}
+.name {
+  font-size: 2.3em;
+  color: var(--accent);
+}
+.headline {
+  font-size: 1.08em;
+}
+.sec h2 {
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: none;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+.entry-main .org {
+  font-style: italic;
+}
+li::marker {
+  color: var(--accent);
+}

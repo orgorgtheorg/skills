@@ -1,0 +1,41 @@
+/* editorial — a serif display name over a sans body, sentence-case serif
+   headings, thin rules. Presence without ornament: marketing, design,
+   writing, communications, leadership roles. */
+:root {
+  --base: 10.5pt;
+  --font-body:
+    "Noto Sans", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-head:
+    "Noto Serif Display", "Noto Serif", "Liberation Serif", Georgia, serif;
+}
+@page {
+  margin: 0.65in 0.75in;
+}
+.head {
+  padding-bottom: 0.6em;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 0.9em;
+}
+.name {
+  font-size: 2.6em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.headline {
+  font-family: var(--font-head);
+  font-style: italic;
+  font-size: 1.12em;
+  color: var(--ink);
+}
+.sec h2 {
+  font-family: var(--font-head);
+  font-size: 1.05em;
+  font-weight: 700;
+  text-transform: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+.entry-main .org {
+  font-style: italic;
+}
