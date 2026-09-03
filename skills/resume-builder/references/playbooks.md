@@ -202,8 +202,8 @@ Field norms that win over the pick: law, finance, consulting, government,
 medicine, and academia read `classic`; a two-page senior resume reads
 `compact` or `classic`; a student club application can carry `warm` or
 `editorial` when the person wants it. One accent per resume, and the name is
-the only large thing on the page. If they hesitate, render two looks and let
-them choose in the preview tab.
+the only large thing on the page. If they hesitate, point them at the Look menu and the accent picker in the
+preview tab: whatever they pick lands in the front matter of `resume.md`.
 
 ## Header and contact
 

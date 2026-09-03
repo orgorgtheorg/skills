@@ -758,6 +758,7 @@ def main():
     report = {
         "name": model["name"],
         "theme": settings["theme"],
+        "accent": settings["accent"],
         "paper": settings["paper"],
         "pages": pages,
         "target_pages": target,

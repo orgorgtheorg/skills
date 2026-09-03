@@ -215,11 +215,16 @@ nohup python3 /.skills/resume-builder/scripts/preview.py > /workspace/resume/pre
 orgorg-artifact add --id resume-<slug> --kind url --port 5190 --route /<slug>/ --title "Resume — <target>" --live
 ```
 
-The tab shows the printed pages stacked like paper, the download links, and
-the last render's lint report. It polls the folder every two seconds, so every
-render below updates it by itself: never `orgorg-artifact touch` it. The
-server is idempotent (a second start exits at once) and serves every target
-at `/<slug>/`, so a new target needs only its own `orgorg-artifact add`.
+The tab shows the printed pages stacked like paper, the download links, the
+last render's lint report, a Look menu, and an accent picker (the preset
+swatches, a color picker, a hex field). It polls the folder every two seconds,
+so every render below updates it by itself: never `orgorg-artifact touch` it.
+A pick in the tab is written into the front matter of `resume.md` (`theme:`,
+`accent:`) and re-rendered by the tab's own server, so your next render keeps
+it: read the front matter before you change the look yourself, and tell the
+person the menu is there. The server is idempotent (a second start exits at
+once) and serves every target at `/<slug>/`, so a new target needs only its
+own `orgorg-artifact add`.
 
 Then render, and re-render after every edit:
 
