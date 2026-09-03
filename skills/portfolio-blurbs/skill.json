@@ -1,0 +1,11 @@
+{
+  "skillId": "portfolio-blurbs",
+  "version": 1,
+  "name": "Portfolio Blurbs",
+  "tagline": "Keep every portfolio company's one-paragraph blurb current — founders confirm it monthly, and your snippet library never goes stale.",
+  "who": "Venture partners and platform teams who keep a description of every portfolio company for emails and intros, and are tired of founders catching a two-month-old blurb.",
+  "how": "Your agent loads the company list into a live spreadsheet you can edit, writes a short check-in email in your voice, and once a month asks each founder whether their blurb is still right — after you approve the batch. It reads the replies a week later, logs every change with the founder's exact words, and asks you to approve each new blurb before it lands. Confirmed blurbs go into a snippet file, and into Superhuman team snippets when you are signed in. Nothing is sent without your yes.",
+  "category": "operations",
+  "accent": "oklch(0.7 0.14 160)",
+  "connectors": []
+}
