@@ -1,0 +1,307 @@
+/* Reading theme — letter-size PDF for screens and home printing
+   Colorblind-safe: navy + amber + slate. Meaning is always labeled, never color-only. */
+
+@page {
+  size: letter;
+  margin: 0.72in 0.78in 0.82in 0.78in;
+  background: #f7f3eb;
+  @bottom-center {
+    content: counter(page);
+    font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    color: #1b2a41;
+    margin-top: 0.18in;
+  }
+}
+
+@page :right {
+  @top-right {
+    content: string(chapter-title);
+    font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5c564c;
+  }
+}
+
+@page :left {
+  @top-left {
+    content: string(book-title);
+    font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5c564c;
+  }
+}
+
+@page chapter-opener {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+@page part-divider {
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-center { content: none; }
+}
+
+html {
+  font-size: 11pt;
+  line-height: 1.48;
+  font-family: "Noto Serif", "Liberation Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  color: #1b2a41;
+  -weasy-hyphens: auto;
+  hyphens: auto;
+}
+
+body {
+  margin: 0;
+  string-set: book-title "Book";
+  background: #f7f3eb;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  color: #1b2a41;
+  page-break-after: avoid;
+  break-after: avoid;
+  line-height: 1.18;
+}
+
+h1 {
+  font-size: 26pt;
+  margin: 1.15in 0 0.18in 0;
+  letter-spacing: -0.02em;
+  string-set: chapter-title content();
+  page: chapter-opener;
+  page-break-before: always;
+  border-bottom: 3pt solid #1b2a41;
+  padding-bottom: 0.16in;
+}
+
+h1::before {
+  content: "Chapter " counter(chapter, decimal);
+  display: block;
+  font-size: 10pt;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.22in;
+  color: #c47a1a;
+}
+
+body.front h1::before { content: none; }
+body.front h1 {
+  margin-top: 0.9in;
+  font-size: 32pt;
+}
+body.back h1::before { content: none; }
+
+h2 {
+  font-size: 16pt;
+  margin: 0.38in 0 0.14in 0;
+  padding-bottom: 0.05in;
+  border-bottom: 1.5pt solid #c47a1a;
+  page-break-before: always;
+  break-before: page;
+}
+
+h3 {
+  font-size: 12.5pt;
+  margin: 0.28in 0 0.08in 0;
+  color: #1b2a41;
+}
+
+h4 {
+  font-size: 11pt;
+  margin: 0.20in 0 0.05in 0;
+  color: #3d4a5c;
+}
+
+h5 {
+  font-size: 10pt;
+  margin: 0.14in 0 0.04in 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+p {
+  margin: 0 0 0.11in 0;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+p + p { text-indent: 1.15em; margin-top: 0; }
+h2 + p, h3 + p, h4 + p, h5 + p,
+.callout + p, .figure + p, ul + p, ol + p, table + p,
+blockquote + p, pre + p, hr + p {
+  text-indent: 0;
+}
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+ul, ol {
+  margin: 0.05in 0 0.12in 0.22in;
+  padding: 0;
+}
+li { margin-bottom: 0.045in; }
+
+a { color: #1b2a41; text-decoration: underline; }
+
+code {
+  font-family: "Noto Sans Mono", "Liberation Mono", "JetBrains Mono", Menlo, monospace;
+  font-size: 0.88em;
+  background: #ece6da;
+  padding: 0 2pt;
+}
+
+pre {
+  font-family: "Noto Sans Mono", "Liberation Mono", "JetBrains Mono", Menlo, monospace;
+  font-size: 8.5pt;
+  line-height: 1.35;
+  background: #ece6da;
+  border-left: 3pt solid #1b2a41;
+  padding: 0.10in 0.14in;
+  margin: 0.12in 0;
+  page-break-inside: avoid;
+  white-space: pre-wrap;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+table {
+  border-collapse: collapse;
+  margin: 0.14in auto;
+  font-size: 9.4pt;
+  width: 100%;
+  background: #fffaf2;
+}
+thead { display: table-header-group; }
+th {
+  border-bottom: 1.5pt solid #1b2a41;
+  border-top: 1.5pt solid #1b2a41;
+  text-align: left;
+  padding: 5pt 7pt;
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8.2pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #e8e1d4;
+  color: #1b2a41;
+}
+td {
+  border-bottom: 0.4pt solid #cfc6b6;
+  padding: 5pt 7pt;
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: 1.2pt solid #1b2a41; }
+
+blockquote {
+  margin: 0.14in 0.12in;
+  padding-left: 0.16in;
+  border-left: 3pt solid #c47a1a;
+  font-style: italic;
+  color: #3d4a5c;
+}
+
+hr {
+  border: none;
+  border-top: 0.5pt solid #cfc6b6;
+  margin: 0.2in 0;
+}
+
+.callout {
+  border: 0.6pt solid #cfc6b6;
+  border-left: 5pt solid #1b2a41;
+  background: #fffaf2;
+  padding: 0.10in 0.14in 0.08in 0.14in;
+  margin: 0.15in 0;
+  page-break-inside: avoid;
+  font-size: 10.2pt;
+  line-height: 1.4;
+}
+.callout > .label {
+  display: block;
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.05in;
+  color: #1b2a41;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+.callout.def { border-left-color: #c47a1a; }
+.callout.def > .label { color: #c47a1a; }
+.callout.key { border-left-color: #1b2a41; background: #eef1f4; }
+.callout.example { border-left-color: #3d4a5c; }
+.callout.warn {
+  border: 1.4pt solid #1b2a41;
+  border-left-width: 5pt;
+  background: #f3efe4;
+}
+
+.figure {
+  margin: 0.18in 0;
+  page-break-inside: avoid;
+  text-align: center;
+}
+.figure img, .figure svg {
+  max-width: 100%;
+  max-height: 6.2in;
+}
+.figure .caption {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 600;
+  margin-top: 0.06in;
+  text-align: left;
+  color: #5c564c;
+}
+.figure .caption::before {
+  content: "FIG " counter(chapter) "." counter(figure) "  ";
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #c47a1a;
+}
+.figure { counter-increment: figure; }
+
+.math-display {
+  margin: 0.10in 0;
+  text-align: center;
+  page-break-inside: avoid;
+}
+.formula-block {
+  border-top: 0.8pt solid #1b2a41;
+  border-bottom: 0.8pt solid #1b2a41;
+  padding: 0.10in 0;
+  margin: 0.16in 0;
+  text-align: center;
+}
+
+dl.kv {
+  display: grid;
+  grid-template-columns: 1.7in 1fr;
+  gap: 4pt 12pt;
+  margin: 0.10in 0;
+  font-size: 10pt;
+}
+dl.kv dt {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #c47a1a;
+}
+dl.kv dd { margin: 0; }
+
+.chapter { counter-reset: figure; counter-increment: chapter; }
+
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+h1, h2, h3, h4, h5, h6 { -webkit-column-break-after: avoid; }

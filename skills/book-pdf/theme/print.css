@@ -1,0 +1,403 @@
+/* ============================================================
+   Custom Book Theme — 6"x9" trim, B&W print
+   Targets WeasyPrint via CSS Paged Media
+   ============================================================ */
+
+/* ---------- PAGE GEOMETRY ---------- */
+@page {
+  size: 6in 9in;
+  margin: 0.75in 0.7in 0.85in 0.7in; /* top right bottom left */
+
+  @bottom-center {
+    content: counter(page);
+    font-family: "Noto Serif", "Liberation Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 9pt;
+    color: #000;
+    margin-top: 0.2in;
+  }
+}
+
+/* odd (right) pages: chapter title in top-right header */
+@page :right {
+  margin-left: 0.6in;
+  margin-right: 0.85in; /* outer */
+  @top-right {
+    content: string(chapter-title);
+    font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000;
+  }
+}
+
+/* even (left) pages: book title in top-left header */
+@page :left {
+  margin-left: 0.85in; /* outer */
+  margin-right: 0.6in;
+  @top-left {
+    content: string(book-title);
+    font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 8.5pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000;
+  }
+}
+
+/* chapter opener page: no header, page number bottom */
+@page chapter-opener {
+  @top-left { content: none; }
+  @top-right { content: none; }
+}
+
+/* part divider page: blank, no header/footer */
+@page part-divider {
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-center { content: none; }
+}
+
+/* ---------- ROOT TYPOGRAPHY ---------- */
+html {
+  font-size: 10.5pt;
+  line-height: 1.42;
+  font-family: "Noto Serif", "Liberation Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  color: #000;
+  -weasy-hyphens: auto;
+  hyphens: auto;
+}
+body {
+  margin: 0;
+  string-set: book-title "Custom Book — Chapter 2";
+}
+
+/* ---------- HEADINGS ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  color: #000;
+  page-break-after: avoid;
+  break-after: avoid;
+  line-height: 1.18;
+}
+
+/* h1 = chapter title (only one per chapter) */
+h1 {
+  font-size: 28pt;
+  margin: 1.6in 0 0.15in 0;
+  letter-spacing: -0.01em;
+  string-set: chapter-title content();
+  page: chapter-opener;
+  page-break-before: right; /* chapters always start on right page */
+  border-bottom: 2pt solid #000;
+  padding-bottom: 0.18in;
+}
+h1::before {
+  content: "Chapter " counter(chapter, decimal) " — ";
+  display: block;
+  font-size: 11pt;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.25in;
+  color: #000;
+}
+
+/* h2 = part headings (e.g. "Part I — Foundations") */
+h2 {
+  font-size: 18pt;
+  margin: 0.45in 0 0.18in 0;
+  border-bottom: 0.5pt solid #000;
+  padding-bottom: 0.06in;
+  page-break-before: always;
+  break-before: page;
+}
+
+/* h3 = section */
+h3 {
+  font-size: 13pt;
+  margin: 0.30in 0 0.10in 0;
+}
+
+/* h4 = subsection */
+h4 {
+  font-size: 11.5pt;
+  margin: 0.22in 0 0.06in 0;
+  font-style: normal;
+}
+
+/* h5 = inline emphasis / labeled paragraph head */
+h5 {
+  font-size: 10.5pt;
+  margin: 0.15in 0 0.04in 0;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+/* ---------- BODY TEXT ---------- */
+p {
+  margin: 0 0 0.10in 0;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+p + p { text-indent: 1.2em; margin-top: 0; }
+h2 + p, h3 + p, h4 + p, h5 + p,
+.callout + p, .figure + p, ul + p, ol + p, table + p,
+blockquote + p, pre + p, hr + p {
+  text-indent: 0;
+}
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+/* ---------- LISTS ---------- */
+ul, ol {
+  margin: 0.05in 0 0.12in 0.25in;
+  padding: 0;
+}
+li { margin-bottom: 0.04in; }
+li > ul, li > ol { margin-top: 0.04in; }
+
+/* ---------- LINKS / INLINE CODE ---------- */
+a { color: #000; text-decoration: underline; }
+code {
+  font-family: "Noto Sans Mono", "Liberation Mono", "JetBrains Mono", Menlo, monospace;
+  font-size: 0.88em;
+  background: #f0f0f0;
+  padding: 0 2pt;
+  border-radius: 1pt;
+}
+pre {
+  font-family: "Noto Sans Mono", "Liberation Mono", "JetBrains Mono", Menlo, monospace;
+  font-size: 8.5pt;
+  line-height: 1.35;
+  background: #f3f3f3;
+  border-left: 2pt solid #000;
+  padding: 0.10in 0.14in;
+  margin: 0.12in 0;
+  page-break-inside: avoid;
+  white-space: pre-wrap;
+}
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ---------- TABLES ---------- */
+table {
+  border-collapse: collapse;
+  margin: 0.14in auto;
+  font-size: 9.5pt;
+  width: 100%;
+  /* allow long tables to break across pages — repeat header */
+}
+thead { display: table-header-group; }
+th {
+  border-bottom: 1pt solid #000;
+  border-top: 1pt solid #000;
+  text-align: left;
+  padding: 4pt 6pt;
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+td {
+  border-bottom: 0.4pt solid #888;
+  padding: 4pt 6pt;
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: 1pt solid #000; }
+
+table.compact td, table.compact th { padding: 2.5pt 5pt; font-size: 9pt; }
+
+/* ---------- BLOCKQUOTES ---------- */
+blockquote {
+  margin: 0.14in 0.2in;
+  padding-left: 0.16in;
+  border-left: 1.5pt solid #000;
+  font-style: italic;
+  color: #222;
+}
+
+/* ---------- HORIZONTAL RULES ---------- */
+hr {
+  border: none;
+  border-top: 0.5pt solid #000;
+  margin: 0.2in 0;
+}
+
+/* ---------- CALLOUT BOXES ----------
+   B&W only: light gray fill + heavy left bar. Use for definitions,
+   worked examples, key ideas, warnings. */
+.callout {
+  border: 0.5pt solid #000;
+  border-left: 4pt solid #000;
+  background: #f4f4f4;
+  padding: 0.10in 0.14in 0.06in 0.14in;
+  margin: 0.16in 0;
+  page-break-inside: avoid;
+  font-size: 10pt;
+  line-height: 1.38;
+}
+.callout > .label {
+  display: block;
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.05in;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+.callout.def      { background: #f4f4f4; }
+.callout.example  { background: #ededed; border-left-style: solid; }
+.callout.key      { background: #e7e7e7; }
+.callout.warn     { background: #f4f4f4; border: 1.5pt solid #000; border-left-width: 4pt; }
+.callout.warn  > .label::before { content: "⚠  "; font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif; }
+
+/* ---------- FIGURES ---------- */
+.figure {
+  margin: 0.18in 0;
+  page-break-inside: avoid;
+  text-align: center;
+}
+.figure img, .figure svg {
+  max-width: 100%;
+  max-height: 5in;
+  filter: grayscale(100%) contrast(1.05);
+}
+.figure .caption {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 600;
+  margin-top: 0.06in;
+  text-align: center;
+}
+.figure .caption::before {
+  content: "FIG " counter(chapter) "." counter(figure) "  ";
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.figure { counter-increment: figure; }
+
+/* ---------- MATH BLOCKS ---------- */
+.math, .formula {
+  font-family: "STIX Two Math", "Charter", "Georgia", serif;
+  font-style: italic;
+  text-align: center;
+  margin: 0.10in 0;
+  page-break-inside: avoid;
+}
+.formula-block {
+  border-top: 0.5pt solid #000;
+  border-bottom: 0.5pt solid #000;
+  padding: 0.10in 0;
+  margin: 0.16in 0;
+  text-align: center;
+}
+
+/* ---------- KEY-VALUE / GLOSSARY GRID ---------- */
+dl.kv {
+  display: grid;
+  grid-template-columns: 1.5in 1fr;
+  gap: 4pt 12pt;
+  margin: 0.10in 0;
+  font-size: 9.8pt;
+}
+dl.kv dt {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+dl.kv dd { margin: 0; }
+
+/* ---------- CHAPTER OPENER / PART DIVIDER ---------- */
+.chapter { counter-reset: figure; counter-increment: chapter; }
+.part-divider {
+  page: part-divider;
+  page-break-before: right;
+  page-break-after: always;
+  text-align: center;
+  padding-top: 3.0in;
+}
+.part-divider .roman {
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11pt;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+.part-divider .title {
+  font-family: "Noto Serif", "Liberation Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 26pt;
+  font-style: italic;
+  margin-top: 0.3in;
+}
+.part-divider .rule {
+  width: 0.6in;
+  border-top: 1pt solid #000;
+  margin: 0.3in auto;
+}
+.part-divider .blurb {
+  font-size: 10.5pt;
+  max-width: 3.5in;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* ---------- TOC ---------- */
+nav#toc h2 {
+  border: none;
+  page-break-before: always;
+  font-size: 22pt;
+  margin-top: 0.6in;
+}
+nav#toc ul { list-style: none; padding: 0; margin: 0.18in 0 0 0; }
+nav#toc li {
+  font-size: 10pt;
+  margin: 2.5pt 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+nav#toc li.part {
+  margin-top: 0.16in;
+  font-family: "Noto Sans", "Liberation Sans", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 9pt;
+  border-bottom: 0.5pt solid #000;
+  padding-bottom: 2pt;
+}
+nav#toc li a {
+  text-decoration: none;
+  color: #000;
+}
+nav#toc .leader {
+  flex: 1;
+  border-bottom: 0.5pt dotted #999;
+  margin: 0 4pt 3pt 4pt;
+  height: 1px;
+}
+nav#toc .pgnum { font-variant-numeric: tabular-nums; }
+
+/* ---------- PRINT-SAFE GRAYSCALE OVERRIDES ----------
+   Force everything to grayscale to keep B&W print clean. */
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+img, svg { filter: grayscale(100%); }
+
+/* avoid orphan headings + last-line widows aggressively */
+h1, h2, h3, h4, h5, h6 { -webkit-column-break-after: avoid; }
+
+/* Front and back matter: no "Chapter N" kicker (set role: front|back in frontmatter). */
+body.front h1::before, body.back h1::before { content: none; }
+body.front h1 { margin-top: 0.9in; }

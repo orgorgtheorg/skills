@@ -1,0 +1,11 @@
+{
+  "skillId": "book-pdf",
+  "version": 1,
+  "name": "Book PDF",
+  "tagline": "Write a real book on any subject — chapters, diagrams, math, callouts — and hand back a typeset PDF you would print.",
+  "who": "Anyone who wants a dense, well-designed reference on a subject they need to learn or teach: a founder onboarding into a new domain, a team that needs a shared primer, a person who reads better on paper than in chat.",
+  "how": "Your agent asks what the book is about, who reads it, how long it should be, and whether it is for the screen or for print. It writes a shared fact sheet and voice guide, then hands each chapter to its own worker so a twelve-chapter book is written in parallel and stays consistent. Each chapter is markdown with embedded diagrams, typeset math, definition and warning boxes, and tables. The build renders it on the agent's own computer into one PDF with chapter openers, running headers, figure numbers, a glossary, and page numbers. You get a download link and preview pages. No cloud service, no design tool.",
+  "category": "general",
+  "accent": "oklch(0.45 0.08 250)",
+  "connectors": []
+}
