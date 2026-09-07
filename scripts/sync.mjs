@@ -13,7 +13,19 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const CATEGORIES = new Set(["growth", "operations", "build", "general"]);
+const SHELVES = new Set([
+  "sales",
+  "marketing",
+  "meetings",
+  "research",
+  "investors",
+  "documents",
+  "security",
+  "anyone",
+]);
+const OUTPUTS = new Set(["sheet", "doc", "pdf", "slides", "video", "app", "emailDrafts"]);
+const RUNS = new Set(["once", "scheduled", "loop"]);
+const FREQS = new Set(["hourly", "daily", "weekdays", "weekly", "monthly"]);
 const SKILLS_DIR = "skills";
 
 function fail(msg) {
@@ -34,8 +46,30 @@ function validate(id, m) {
       fail(`${ctx}: missing ${key}`);
   }
   if (m.tagline && m.tagline.length > 140) fail(`${ctx}: tagline > 140 chars`);
-  if (!CATEGORIES.has(m.category))
-    fail(`${ctx}: category must be one of ${[...CATEGORIES].join("/")}`);
+  if (!SHELVES.has(m.shelf))
+    fail(`${ctx}: shelf must be one of ${[...SHELVES].join("/")}`);
+  if (m.outputs !== undefined) {
+    if (!Array.isArray(m.outputs) || m.outputs.some((o) => !OUTPUTS.has(o)))
+      fail(`${ctx}: outputs must be a list from ${[...OUTPUTS].join("/")}`);
+  }
+  if (m.runs !== undefined && !RUNS.has(m.runs))
+    fail(`${ctx}: runs must be one of ${[...RUNS].join("/")}`);
+  if (m.changelog !== undefined && typeof m.changelog !== "string")
+    fail(`${ctx}: changelog must be a string`);
+  if (m.bundle !== undefined) {
+    if (typeof m.bundle !== "object" || m.bundle === null)
+      fail(`${ctx}: bundle must be an object`);
+    if (m.bundle.app && !existsSync(join(SKILLS_DIR, id, "bundle", "app")))
+      fail(`${ctx}: bundle.app is set but bundle/app/ is missing`);
+    if (existsSync(join(SKILLS_DIR, id, "bundle", "app", "node_modules")))
+      fail(`${ctx}: bundle/app/node_modules must not ship`);
+    for (const sch of m.bundle.schedules ?? []) {
+      if (!sch.key || !sch.title || !sch.prompt || !/^\d{2}:\d{2}$/.test(sch.time ?? ""))
+        fail(`${ctx}: every bundle schedule needs key, title, time (HH:MM), prompt`);
+      if (!FREQS.has(sch.freq))
+        fail(`${ctx}: schedule "${sch.key}" freq must be one of ${[...FREQS].join("/")}`);
+    }
+  }
   if (m.accent !== undefined && typeof m.accent !== "string")
     fail(`${ctx}: accent must be a string`);
   if (m.featured !== undefined && typeof m.featured !== "boolean")
@@ -57,10 +91,14 @@ function validate(id, m) {
     "tagline",
     "who",
     "how",
-    "category",
+    "shelf",
     "accent",
     "featured",
     "connectors",
+    "outputs",
+    "runs",
+    "bundle",
+    "changelog",
   ]);
   for (const key of Object.keys(m)) {
     if (!allowed.has(key)) fail(`${ctx}: unknown key "${key}"`);
@@ -89,6 +127,9 @@ for (const id of ids) {
   validate(id, manifest);
   if (!existsSync(join(SKILLS_DIR, id, "SKILL.md"))) {
     fail(`skills/${id}/ has no SKILL.md — a skill IS its SKILL.md`);
+  }
+  if (!existsSync(join(SKILLS_DIR, id, "icon.png"))) {
+    console.warn(`  ! skills/${id}/ has no icon.png — the store shows a placeholder tile`);
   }
   // Artwork is convention, not manifest fields: icon.png + screenshots/*.
   // Relative paths here; the sync phase turns them into raw.githubusercontent

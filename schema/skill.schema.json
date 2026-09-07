@@ -9,7 +9,7 @@
     "tagline",
     "who",
     "how",
-    "category",
+    "shelf",
     "connectors"
   ],
   "additionalProperties": false,
@@ -19,29 +19,160 @@
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
       "description": "Stable id; must equal the folder name."
     },
-    "version": { "type": "integer", "minimum": 1 },
-    "name": { "type": "string", "minLength": 1 },
-    "tagline": { "type": "string", "minLength": 1, "maxLength": 140 },
-    "who": { "type": "string", "minLength": 1 },
-    "how": { "type": "string", "minLength": 1 },
-    "category": { "enum": ["growth", "operations", "build", "general"] },
-    "accent": { "type": "string" },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 140
+    },
+    "who": {
+      "type": "string",
+      "minLength": 1
+    },
+    "how": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Shown as 'What you get'."
+    },
+    "shelf": {
+      "enum": [
+        "sales",
+        "marketing",
+        "meetings",
+        "research",
+        "investors",
+        "documents",
+        "security",
+        "anyone"
+      ],
+      "description": "The Browse shelf the skill sits on."
+    },
+    "accent": {
+      "type": "string",
+      "description": "Icon tint (oklch) for the placeholder tile when icon.png is missing."
+    },
     "featured": {
       "type": "boolean",
       "description": "Pins this skill to the store's Featured slot. At most one skill should set it."
     },
     "connectors": {
       "type": "array",
+      "description": "Services the skill uses; the store shows their marks. Ids: gmail, google-calendar, slack, linkedin, notion, github, hubspot, salesforce, stripe, zoom, superhuman, microsoft, clay.",
       "items": {
         "type": "object",
-        "required": ["id", "label", "required"],
+        "required": [
+          "id",
+          "label",
+          "required"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string" },
-          "label": { "type": "string" },
-          "required": { "type": "boolean" }
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          }
         }
       }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "sheet",
+          "doc",
+          "pdf",
+          "slides",
+          "video",
+          "app",
+          "emailDrafts"
+        ]
+      },
+      "description": "What the skill hands back."
+    },
+    "runs": {
+      "enum": [
+        "once",
+        "scheduled",
+        "loop"
+      ],
+      "description": "once = one job; scheduled = fires on a schedule; loop = a standing behaviour or a multi-week cycle."
+    },
+    "bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "What the folder ships beyond SKILL.md and scripts. Teaching a bundled skill queues a setup task for the agent.",
+      "properties": {
+        "app": {
+          "type": "boolean",
+          "description": "bundle/app/ holds a pre-built app (no node_modules, no data)."
+        },
+        "schedules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "title",
+              "freq",
+              "time",
+              "prompt"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "freq": {
+                "enum": [
+                  "hourly",
+                  "daily",
+                  "weekdays",
+                  "weekly",
+                  "monthly"
+                ]
+              },
+              "days": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "time": {
+                "type": "string",
+                "pattern": "^\\d{2}:\\d{2}$"
+              },
+              "monthDay": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31
+              },
+              "prompt": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "changelog": {
+      "type": "string",
+      "description": "One line on what this version changed."
     }
   }
 }
