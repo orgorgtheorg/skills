@@ -54,3 +54,5 @@ doc with the one thing that most needs the user today.
 
 Draft in Gmail via the browser, show the user the draft, and confirm before
 sending — sending email is a consequential action, never silent.
+
+<!-- v2: reads the context doc first; accountability footer. -->

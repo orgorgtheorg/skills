@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "OrgOrg Skill Store manifest (skills/<id>/skill.json)",
+  "title": "OrgOrg Skill Store manifest (skills/<id>/skill.json), v2",
   "type": "object",
   "required": [
     "skillId",
@@ -9,10 +9,29 @@
     "tagline",
     "who",
     "how",
-    "category",
-    "connectors"
+    "shelf",
+    "tags",
+    "outputs",
+    "runs",
+    "needs",
+    "connectors",
+    "examples"
   ],
   "additionalProperties": false,
+  "$defs": {
+    "outputKind": {
+      "enum": [
+        "sheet",
+        "doc",
+        "pdf",
+        "video",
+        "app",
+        "emailDrafts",
+        "slides",
+        "report"
+      ]
+    }
+  },
   "properties": {
     "skillId": {
       "type": "string",
@@ -21,17 +40,76 @@
     },
     "version": { "type": "integer", "minimum": 1 },
     "name": { "type": "string", "minLength": 1 },
-    "tagline": { "type": "string", "minLength": 1, "maxLength": 140 },
-    "who": { "type": "string", "minLength": 1 },
-    "how": { "type": "string", "minLength": 1 },
-    "category": { "enum": ["growth", "operations", "build", "general"] },
-    "accent": { "type": "string" },
-    "featured": {
-      "type": "boolean",
-      "description": "Pins this skill to the store's Featured slot. At most one skill should set it."
+    "tagline": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 140,
+      "description": "The card copy: one line, what job it does."
+    },
+    "who": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who it is for."
+    },
+    "how": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Mechanism and outcome, two to four sentences. Shown as 'What you get'."
+    },
+    "shelf": {
+      "enum": [
+        "sales",
+        "marketing",
+        "meetings",
+        "research",
+        "investors",
+        "documents",
+        "security",
+        "anyone"
+      ],
+      "description": "The Browse shelf. One per skill."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free words for search: audience, output, anything."
+    },
+    "outputs": {
+      "type": "array",
+      "description": "What the skill hands back — the chips on the card.",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": { "$ref": "#/$defs/outputKind" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "runs": {
+      "enum": ["once", "scheduled", "loop"],
+      "description": "once = one job per ask; scheduled = ships or asks for a schedule; loop = a multi-step cycle with wake-ups."
+    },
+    "needs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "desktopSignIn": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Sites the person must sign in to on the shared desktop."
+        },
+        "forksWorkers": { "type": "boolean" },
+        "estMinutes": {
+          "type": "number",
+          "description": "Rough minutes per run."
+        }
+      }
     },
     "connectors": {
       "type": "array",
+      "description": "Services the skill talks to. The store draws the real logo for known ids: gmail, google-calendar, google-meet, google-sheets, google-docs, google-drive, slack, linkedin, notion, github, hubspot, zoom, stripe, superhuman, salesforce, x, linear, airtable, calendly, intercom, zendesk, asana, trello, jira, figma, dropbox, microsoft, outlook, teams.",
       "items": {
         "type": "object",
         "required": ["id", "label", "required"],
@@ -42,6 +120,73 @@
           "required": { "type": "boolean" }
         }
       }
+    },
+    "examples": {
+      "type": "array",
+      "description": "Real outputs from a demo run the store links to. Use [] when there are none yet.",
+      "items": {
+        "type": "object",
+        "required": ["title", "kind", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string" },
+          "kind": { "$ref": "#/$defs/outputKind" },
+          "url": { "type": "string" }
+        }
+      }
+    },
+    "bundle": {
+      "type": "object",
+      "description": "What the folder ships beyond SKILL.md and scripts. A bundle makes teaching queue a low-priority setup task for the agent.",
+      "additionalProperties": false,
+      "properties": {
+        "app": {
+          "type": "object",
+          "required": ["path"],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Folder inside the skill holding a pre-built artifact app (Vite + local Convex), e.g. bundle/app."
+            }
+          }
+        },
+        "schedules": {
+          "type": "array",
+          "description": "Schedules the agent creates PAUSED at setup; the person confirms day and timezone.",
+          "items": {
+            "type": "object",
+            "required": ["key", "title", "freq", "prompt"],
+            "additionalProperties": false,
+            "properties": {
+              "key": { "type": "string" },
+              "title": { "type": "string" },
+              "freq": {
+                "enum": ["hourly", "daily", "weekdays", "weekly", "monthly"]
+              },
+              "time": {
+                "type": "string",
+                "description": "HH:MM in the person's timezone."
+              },
+              "days": { "type": "array", "items": { "type": "string" } },
+              "monthDay": { "type": "integer" },
+              "prompt": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "changelog": {
+      "type": "string",
+      "description": "One line: what changed in this version. Shown in the update sheet."
+    },
+    "accent": {
+      "type": "string",
+      "description": "Fallback tint (oklch) when there is no icon."
+    },
+    "featured": {
+      "type": "boolean",
+      "description": "Pins this skill to the store's Featured slot. At most one skill should set it."
     }
   }
 }
