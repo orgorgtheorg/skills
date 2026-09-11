@@ -47,7 +47,7 @@ skills/<id>/
   store draws the real logo for known ids — see the schema for the list.
 - `examples` links real outputs from a demo run (`{title, kind, url}`); `[]`
   until there are some.
-- `bundle` (optional) declares `app: { path }` and/or `schedules: [...]`.
+- `bundle` (optional) declares `app: { path, name? }`, `apps: [{ path, name }]` for several, and/or `schedules: [...]`.
   Schedules are created paused; never rely on one starting by itself.
 - `icon.png` is required. Flat, two-tone, one subject, no text.
 
