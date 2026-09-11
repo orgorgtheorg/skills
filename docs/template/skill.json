@@ -1,0 +1,36 @@
+{
+  "skillId": "invoice-chaser",
+  "version": 1,
+  "name": "Invoice chaser",
+  "tagline": "Chases every unpaid invoice each Friday with a short, polite email in your voice — you approve the batch first.",
+  "who": "Founders and finance leads who invoice customers and hate the awkward follow-up.",
+  "how": "Each Friday the agent reads the open invoices, drafts one reminder per customer in your voice, and asks you to approve the batch. Approved drafts go out from your mailbox; replies land in a sheet with the state of each invoice.",
+  "shelf": "meetings",
+  "tags": ["invoices", "collections", "weekly", "finance"],
+  "outputs": [
+    { "kind": "emailDrafts" },
+    { "kind": "sheet", "label": "Invoice tracker" }
+  ],
+  "runs": "scheduled",
+  "needs": { "estMinutes": 6 },
+  "connectors": [
+    { "id": "gmail", "label": "Gmail", "required": true },
+    { "id": "stripe", "label": "Stripe", "required": false }
+  ],
+  "examples": [],
+  "bundle": {
+    "app": { "path": "bundle/app" },
+    "schedules": [
+      {
+        "key": "invoice-chase",
+        "title": "Chase unpaid invoices",
+        "freq": "weekly",
+        "days": ["Fri"],
+        "time": "09:00",
+        "prompt": "Run the invoice-chaser skill: read the tracker, draft one reminder per overdue invoice, ask for approval of the batch, then send the approved ones."
+      }
+    ]
+  },
+  "changelog": "First version",
+  "accent": "oklch(0.7 0.14 160)"
+}
