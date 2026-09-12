@@ -2,9 +2,9 @@
   "skillId": "weekly-report",
   "version": 2,
   "name": "Weekly Report",
-  "tagline": "A Monday-morning digest of last week — meetings, email, and every action item you committed to, traced to its source.",
-  "who": "Leaders and investors whose week is back-to-back meetings — anyone who wants Monday to start with what happened, what they promised, and what needs them, without rereading anything.",
-  "how": "Every Monday (or on request) your agent sweeps the week's meeting notes, email, and calendar, and delivers a one-page report doc — top of mind, this week's meetings, a deduped action-item list, next week's prep — plus a two-line chat summary. Missing a source? It works with what it has and flags the gap once.",
+  "tagline": "A Monday digest of last week: meetings, email, and every action item you committed to, traced to its source.",
+  "who": "Leaders and investors whose week is back-to-back meetings, and anyone who wants Monday to start with what happened, what they promised, and what needs them, without rereading anything.",
+  "how": "Every Monday, or whenever you ask, your agent sweeps the week's meeting notes, email and calendar, and delivers a one-page report doc with four sections:\n\n- Top of mind\n- This week's meetings\n- A deduped action-item list\n- Next week's prep\n\nYou also get a two-line summary in chat. If a source is missing, the agent works with what it has and flags the gap once.",
   "shelf": "meetings",
   "tags": [
     "digest",
